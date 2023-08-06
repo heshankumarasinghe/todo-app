@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import "./App.css";
 
-// const baseUrl = "http://localhost:3001";
-const baseUrl = "http://3.110.206.177";
+const baseUrl = "http://13.235.69.174";
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -44,36 +44,54 @@ function App() {
   };
 
   return (
-    <div>
+    <div className="app-container">
       <h1>Todo App</h1>
-      <input
-        type="text"
-        value={newTodo}
-        onChange={(e) => setNewTodo(e.target.value)}
-      />
-      <button onClick={handleCreateTodo}>Add Todo</button>
-      <ul>
+      <div className="input-container">
+        <input
+          type="text"
+          value={newTodo}
+          onChange={(e) => setNewTodo(e.target.value)}
+          placeholder="Enter a new todo"
+        />
+        <button className="btn" onClick={handleCreateTodo}>
+          Add Todo
+        </button>
+      </div>
+      <ul className="todo-list">
         {todos.map((todo) => (
-          <li key={todo._id}>
+          <li key={todo._id} className="todo-item">
             {editedTodoId === todo._id ? (
-              <>
+              <div className="edit-container">
                 <input
                   type="text"
                   value={editedTodoText}
                   onChange={(e) => setEditedTodoText(e.target.value)}
                 />
-                <button onClick={() => handleUpdateTodo(todo._id)}>Save</button>
-              </>
+                <button
+                  className="btn"
+                  onClick={() => handleUpdateTodo(todo._id)}
+                >
+                  Save
+                </button>
+              </div>
             ) : (
-              <>
-                {todo.text}
-                <button onClick={() => handleEditTodo(todo._id, todo.text)}>
-                  Edit
-                </button>
-                <button onClick={() => handleDeleteTodo(todo._id)}>
-                  Delete
-                </button>
-              </>
+              <div className="todo-details">
+                <span>{todo.text}</span>
+                <div className="btn-group">
+                  <button
+                    className="btn edit-btn"
+                    onClick={() => handleEditTodo(todo._id, todo.text)}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    className="btn delete-btn"
+                    onClick={() => handleDeleteTodo(todo._id)}
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
             )}
           </li>
         ))}
