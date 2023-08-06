@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.css";
 
-const baseUrl = "http://13.235.69.174";
+const baseUrl = "http://3.110.25.227";
 
 function App() {
   const [todos, setTodos] = useState([]);
